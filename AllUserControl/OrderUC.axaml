@@ -1,0 +1,76 @@
+<UserControl x:Class="Demo1.AllUserControl.OrderUC"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" Margin="10" VerticalScrollBarVisibility="Auto">
+            <ListBox Name="OrderListBox"
+                     SelectionChanged="OrderListBox_OnSelectionChanged"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     ItemsSource="{Binding OrderList}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0,5" Padding="12" Background="#FFF" CornerRadius="6" BorderBrush="#BDC3C7" BorderThickness="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Orderid}" FontSize="13" FontWeight="Bold" Foreground="#2C3E50"/>
+                                <StackPanel Grid.Column="1" Orientation="Vertical">
+                                    <TextBlock Text="Статус" FontSize="10" Foreground="#7F8C8D"/>
+                                    <TextBlock Text="{Binding Status, FallbackValue=—, TargetNullValue=—}"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"
+                                               Foreground="#2C3E50"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Vertical">
+                                    <TextBlock Text="Адрес" FontSize="10" Foreground="#7F8C8D"/>
+                                    <TextBlock Text="{Binding Address, FallbackValue=—, TargetNullValue=—}"
+                                               FontSize="13"
+                                               TextWrapping="Wrap"
+                                               Foreground="#2C3E50"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="3" Orientation="Vertical">
+                                    <!-- Дата оформления -->
+                                    <TextBlock Text="Дата заказа" FontSize="10" Foreground="#7F8C8D"/>
+                                    <TextBlock Text="{Binding Orderdate, StringFormat={}{0:dd.MM.yyyy}}" 
+                                               FontSize="13"
+                                               Foreground="#2C3E50"/>
+
+                                    <!-- Дата выдачи -->
+                                    <TextBlock Text="Дата выдачи" Margin="0,6,0,0" FontSize="10" Foreground="#7F8C8D"/>
+                                    <TextBlock Text="{Binding Orderdateissue, StringFormat={}{0:dd.MM.yyyy}}" 
+                                               FontSize="13" 
+                                               Foreground="#27AE60"/>
+
+                                    <!-- Клиент -->
+                                    <TextBlock Text="{Binding UserLastName}" Margin="0,4,0,0" FontSize="10" Foreground="#95A5A6"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <Border Grid.Row="1" Background="#2C3E50" Padding="15">
+            <StackPanel Name="ButtonPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="AddButton" Click="AddButton_OnClick" Content="Добавить заказ" Width="140" Height="38" Margin="8,0" Background="#27AE60" Foreground="White" CornerRadius="5"/>
+                <Button Name="EditButton" Click="EditButton_OnClick" Content="Изменить статус" Width="140" Height="38" Margin="8,0" Background="#3498DB" Foreground="White" CornerRadius="5"/>
+                <Button Name="DeleteButton" Click="DeleteButton_OnClick" Content="Удалить" Width="100" Height="38" Margin="8,0" Background="#E74C3C" Foreground="White" CornerRadius="5"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

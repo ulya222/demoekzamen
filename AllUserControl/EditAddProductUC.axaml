@@ -1,0 +1,170 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             d:DesignWidth="800" 
+             d:DesignHeight="600"
+             x:Class="Demo1.AllUserControl.EditAddProductUC"
+             xmlns:vm="clr-namespace:Demo1.AllUserControl;assembly=Demo1"
+             x:DataType="vm:EditAddProductUC">
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Vertical"
+                    Margin="0,20,0,20"
+                    Spacing="16">
+
+            <!-- Превью изображения товара -->
+            <Image Width="120"
+                   Height="120"
+                   Source="{Binding _product.ImagePath}"
+                   HorizontalAlignment="Center"/>
+
+            <!-- Сетка полей: пояснение слева, ввод справа в одной строке -->
+            <Grid Name="MainPanel"
+                  Margin="0,10,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="260"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Наименование -->
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="Наименование"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Row="0" Grid.Column="1"
+                         Name="NameTextBox"
+                         Text="{Binding _product.Productname}"
+                         Margin="0,0,0,6"/>
+
+                <!-- Ед. изм. -->
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Ед. изм."
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                         Name="UnitTextBox"
+                         Text="{Binding _product.Productunit}"
+                         Margin="0,0,0,6"/>
+
+                <!-- Цена -->
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Text="Цена"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1"
+                         Name="PriceTextBox"
+                         Text="{Binding _product.Productprice}"
+                         Margin="0,0,0,6"/>
+
+                <!-- Производитель -->
+                <TextBlock Grid.Row="3" Grid.Column="0"
+                           Text="Производитель"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="3" Grid.Column="1"
+                          Name="ManufacturerComboBox"
+                          ItemsSource="{Binding manufacturers}"
+                          SelectedItem="{Binding _product.ManufacturerNavigation}"
+                          Margin="0,0,0,6">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Manufacturername}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!-- Поставщик -->
+                <TextBlock Grid.Row="4" Grid.Column="0"
+                           Text="Поставщик"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="4" Grid.Column="1"
+                          Name="SupplierComboBox"
+                          ItemsSource="{Binding suppliers}"
+                          SelectedItem="{Binding _product.SupplierNavigation}"
+                          Margin="0,0,0,6">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Suppliername}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!-- Категория -->
+                <TextBlock Grid.Row="5" Grid.Column="0"
+                           Text="Категория"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <ComboBox Grid.Row="5" Grid.Column="1"
+                          Name="CategoryComboBox"
+                          ItemsSource="{Binding categories}"
+                          SelectedItem="{Binding _product.CategoryNavigation}"
+                          Margin="0,0,0,6">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Categoryname}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <!-- Скидка -->
+                <TextBlock Grid.Row="6" Grid.Column="0"
+                           Text="Скидка"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Row="6" Grid.Column="1"
+                         Name="DiscountTextBox"
+                         Text="{Binding _product.Discount}"
+                         Margin="0,0,0,6"/>
+
+                <!-- Кол-во на складе -->
+                <TextBlock Grid.Row="7" Grid.Column="0"
+                           Text="Кол-во на складе"
+                           Margin="0,0,12,6"
+                           VerticalAlignment="Center"/>
+                <TextBox Grid.Row="7" Grid.Column="1"
+                         Name="CountinstockTextBox"
+                         Text="{Binding _product.Countinstock}"
+                         Margin="0,0,0,6"/>
+
+                <!-- Описание -->
+                <TextBlock Grid.Row="8" Grid.Column="0"
+                           Text="Описание"
+                           Margin="0,0,12,0"
+                           VerticalAlignment="Top"/>
+                <TextBox Grid.Row="8" Grid.Column="1"
+                         Name="DescriptionTextBox"
+                         Text="{Binding _product.Description}"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         MinHeight="60"/>
+            </Grid>
+
+            <!-- Кнопка сохранения -->
+            <Button Name="OkButton"
+                    Click="OkButton_OnClick"
+                    Width="140"
+                    Height="36"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,0">
+                Сохранить
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

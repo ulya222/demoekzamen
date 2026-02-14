@@ -1,0 +1,92 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="Demo1.AllWindows.MainWindow"
+        Title="Demo1"
+        Width="1000"
+        Height="700">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- ================= ВЕРХНЯЯ ПАНЕЛЬ (навигация) ================= -->
+        <Grid Grid.Row="0" Background="#2C3E50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Логотип -->
+            <Image x:Name="LogoImage"
+                   Grid.Column="0"
+                   Width="50"
+                   Height="50"
+                   Margin="10"
+                   VerticalAlignment="Center"/>
+
+            <!-- Кнопка Назад -->
+            <Button x:Name="BackButton"
+                    Grid.Column="1"
+                    Content="← Назад"
+                    Width="110"
+                    Height="40"
+                    Margin="5"
+                    Click="BackButton_OnClick"/>
+
+            <!-- Навигация: Каталог / Заказы (видны после входа) -->
+            <StackPanel x:Name="NavPanel"
+                        Grid.Column="2"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="10,0"
+                        IsVisible="False">
+                <Button x:Name="NavCatalogButton"
+                        Content="Каталог товаров"
+                        Width="140"
+                        Height="36"
+                        Margin="0,0,5,0"
+                        Click="NavCatalogButton_OnClick"/>
+                <Button x:Name="NavOrdersButton"
+                        Content="Заказы"
+                        Width="100"
+                        Height="36"
+                        Margin="0,0,0,0"
+                        Click="NavOrdersButton_OnClick"/>
+            </StackPanel>
+
+            <!-- Заголовок -->
+            <TextBlock x:Name="TitleTextBlock"
+                       Grid.Column="3"
+                       Text="Авторизация"
+                       Foreground="White"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- ================= ОСНОВНОЙ КОНТЕНТ ================= -->
+        <ContentControl x:Name="MainContentControl"
+                        Grid.Row="1"/>
+
+        <!-- ================= НИЖНЯЯ ПАНЕЛЬ ================= -->
+        <Grid Grid.Row="2" Background="#34495E">
+            <TextBlock x:Name="MainTextBlock"
+                       Text="Гость"
+                       Foreground="White"
+                       FontSize="16"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Margin="0,0,20,0"/>
+        </Grid>
+
+    </Grid>
+</Window>
